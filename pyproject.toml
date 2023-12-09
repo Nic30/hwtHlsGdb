@@ -1,0 +1,31 @@
+[project]
+name = 'hwtHlsGdb'
+dynamic = ['version',]
+description = 'Implementation of GDB debugger for languages internally used in hwtHls high-level synthesis library'
+readme = "README.md"
+license = { file = 'LICENSE' }
+keyword = ['FPGA', 'ASIC', 'compiler', 'HLS', 'ABC', 'RTL', 'synthesis', 'logicsynthesis',
+           'LLVM', 'VHDL', 'verification', 'Verilog', 'SystemVerilog']
+authors = [
+  { name = 'Michal Orsak', email = 'Nic30original@gmail.com' },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
+  "Topic :: System :: Hardware",
+  "Topic :: System :: Emulators",
+  "Topic :: Utilities"
+]
+dependencies  = [
+  'hwtHls>=0.1',
+]
+
+[project.urls]
+homepage = 'https://github.com/Nic30/hwtHlsGdb'
+repository = 'https://github.com/Nic30/hwtHlsGdb'
