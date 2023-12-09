@@ -115,7 +115,7 @@ if __name__ == "__main__":
     ]
 }
 ``` 
-* Now you should be able to run it as anything other project in VScode (usign F5)
+* Now you should be able to run it as any other project in VScode (usign F5)
 * "program" file needs to be one produced from simulation
 * "miDebuggerPath" must point to a file in this directory
 
