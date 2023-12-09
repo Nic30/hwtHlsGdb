@@ -2,7 +2,7 @@
 
 This python package contains an implementation of debugger for [hwtHls](https://github.com/Nic30/hwtHls)/LLVM intermediate formats.
 It implements a GDB/MI (Machine Interface) and GDB Remote Serial Protocol. It mimics GDB and thus it is compatible with any GDB compatible
-IDE. It is tested Visual Studio Code and Eclipse.
+IDE. It is tested with Visual Studio Code and Eclipse.
 
 
 ## Limitations and intended use
