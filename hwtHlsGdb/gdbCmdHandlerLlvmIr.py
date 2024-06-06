@@ -5,9 +5,9 @@ from math import ceil, inf
 import re
 from typing import Optional, Dict, Tuple, Generator, Union, List, Set, Literal
 
-from hwt.hdl.types.bits import Bits
-from hwt.hdl.types.bitsVal import BitsVal
-from hwt.hdl.value import HValue
+from hwt.hdl.types.bits import HBits
+from hwt.hdl.types.bitsConst import HBitsConst
+from hwt.hdl.const import HConst
 from hwtHls.llvm.llvmIr import Function, BasicBlock, Instruction, TypeToIntegerType, IntegerType, \
     LLVMStringContext
 from hwtHls.ssa.analysis.llvmIrInterpret import LlvmIrInterpret
@@ -103,7 +103,7 @@ class GdbCmdHandlerLllvmIr(GdbCmdHandler):
         self.fnArgs = fnArgs
         self.registerToIndex: Dict[Instruction, int] = {}
         self.registerToName: Dict[Instruction, str] = {}
-        self.registerValue: Dict[Instruction, HValue] = {}
+        self.registerValue: Dict[Instruction, HConst] = {}
         self.registers: List[Union[Instruction, Literal[LlvmIrSimPcReg]]] = [LlvmIrSimPcReg, ]
         self.REGISTER_INFO: List[str] = [
             f'name:pc;bitsize:64;offset:0;encoding:uint;format:hex;set:Program Counter;generic:pc;'
@@ -122,7 +122,7 @@ class GdbCmdHandlerLllvmIr(GdbCmdHandler):
             )
             self.registerToIndex[instr] = r.registerIndex
             self.registerToName[instr] = r.name
-            self.registerValue[instr] = Bits(t.getBitWidth()).from_py(None)
+            self.registerValue[instr] = HBits(t.getBitWidth()).from_py(None)
             regOffset += ceil(t.getBitWidth() / 8)
 
         self.indexToRegister = {v: k for k, v in self.registerToIndex.items()}
@@ -204,7 +204,7 @@ class GdbCmdHandlerLllvmIr(GdbCmdHandler):
                     v = self.instrCodeline[self.instr] * 8
                 byteSize = 8
             else:
-                _v: BitsVal = self.registerValue[r]
+                _v: HBitsConst = self.registerValue[r]
                 v = _v.val & _v.vld_mask
                 byteSize = ceil(_v._dtype.bit_length() / 8)
             v = v.to_bytes(byteSize, 'little')

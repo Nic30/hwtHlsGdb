@@ -51,7 +51,7 @@ class TestCase(SimTestCase):
             pass  # all inputs consummed
 
     def test(self):
-        u = DUT() # Design Under Test (your component)
+        m = HwModuleDUT() # Design Under Test (your component)
         tc = self
 
         class GdbHlsPlatform(VirtualHlsPlatform):
@@ -59,17 +59,17 @@ class TestCase(SimTestCase):
             def runSsaPasses(self, hls: "HlsScope", toSsa: HlsAstToSsa):
                 res = super(TestVirtualHlsPlatform, self).runSsaPasses(hls, toSsa)
                 tr: ToLlvmIrTranslator = toSsa.start
-                tc._testLlvmIr(u, tr.llvm.strCtx, tr.llvm.main, GdbCmdHandlerLllvmIr, ".llvmIrWave.vcd")
+                tc._testLlvmIr(m, tr.llvm.strCtx, tr.llvm.main, GdbCmdHandlerLllvmIr, ".llvmIrWave.vcd")
                 return res
 
             def runNetlistTranslation(self, hls: "HlsScope", toSsa: HlsAstToSsa,
                                       mf: MachineFunction, *args):
                 tr: ToLlvmIrTranslator = toSsa.start
-                tc._testLlvmIr(u, tr.llvm.getMachineFunction(tr.llvm.main), GdbCmdHandlerLllvmMir, '.llvmMirWave.vcd')
+                tc._testLlvmIr(m, tr.llvm.getMachineFunction(tr.llvm.main), GdbCmdHandlerLllvmMir, '.llvmMirWave.vcd')
                 netlist = super(TestVirtualHlsPlatform, self).runNetlistTranslation(hls, toSsa, mf, *args)
                 return netlist
 
-        self.compileSimAndStart(u, target_platform=TestVirtualHlsPlatform(debugFilter=HlsDebugBundle.ALL_RELIABLE))
+        self.compileSimAndStart(m, target_platform=TestVirtualHlsPlatform(debugFilter=HlsDebugBundle.ALL_RELIABLE))
 
 
 if __name__ == "__main__":
