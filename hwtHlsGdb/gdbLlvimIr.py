@@ -272,7 +272,7 @@ def main(argv: Optional[List[str]]=None, dbgFile: Optional[IO[Any]]=None):
                     elif cmd.name == 'file-exec-and-symbols':
                         state.exe = cmd.args[-1]
                         # exe = os.path.relpath(exe, start=os.getcwd())
-                        state.llvm = LlvmCompilationBundle(state.exe)
+                        state.llvm = LlvmCompilationBundle(state.exe, [])
                         Err = SMDiagnostic()
                         with open(state.exe) as irFile:
                             irStr = irFile.read()

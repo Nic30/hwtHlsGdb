@@ -144,7 +144,7 @@ class GdbCmdHandlerLllvmIr(GdbCmdHandler):
         self.cycleLimit -= 1
 
         if not self.waveLogInitialized:
-            _, self.simCodelineLabel, self.simTimeLabel, self.simBlockLabel = _prepareVcdWriter(
+            _, self.simCodelineLabel, self.simTimeLabel, self.simBlockLabel = self.interpret._prepareVcdWriter(
                 waveLog, self.strCtx, self.fn, self.timeStep, self.codelineOffset)
             self.waveLogInitialized = True
         predBb = self.predBb
@@ -165,7 +165,7 @@ class GdbCmdHandlerLllvmIr(GdbCmdHandler):
             if waveLog is not None:
                 waveLog.logChange(self.nowTime, self.simTimeLabel, self.nowTime, None)
                 waveLog.logChange(self.nowTime, self.simCodelineLabel, instr, None)
-            predBb, bb, isJump = _runLlvmIrFunctionInstr(waveLog, self.nowTime, self.registerValue, instr,
+            predBb, bb, isJump = self._runLlvmIrFunctionInstr(waveLog, self.nowTime, self.registerValue, instr,
                                                          predBb, bb, self.fnArgs,
                                                          self.simBlockLabel)
             prevInstr = instr

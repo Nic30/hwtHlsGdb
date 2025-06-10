@@ -22,7 +22,7 @@ from typing import List
 from hwt.simulator.simTestCase import SimTestCase
 from hwtHls.frontend.ast.astToSsa import HlsAstToSsa
 from hwtHls.llvm.llvmIr import Function, MachineFunction, LLVMStringContext
-from hwtHls.platform.platform import HlsDebugBundle
+from hwtHls.platform.debugBundle import HlsDebugBundle
 from hwtHls.platform.virtual import VirtualHlsPlatform
 from hwtHls.ssa.analysis.llvmIrInterpret import SimIoUnderflowErr
 from hwtHlsGdb.gdbCmdHandlerLlvmIr import GdbCmdHandlerLllvmIr
